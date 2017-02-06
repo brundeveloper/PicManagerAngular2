@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { FotoComponent } from "./foto.component"
+import { FotoComponent } from "./foto.component";
 
 @NgModule({
     declarations: [ FotoComponent ],

@@ -6,17 +6,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require("@angular/core");
-var AppComponent = (function () {
-    function AppComponent() {
+var painel_component_1 = require("./painel.component");
+var PainelModule = (function () {
+    function PainelModule() {
     }
-    return AppComponent;
+    return PainelModule;
 }());
-AppComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: "app",
-        templateUrl: "./app.component.html"
+PainelModule = __decorate([
+    core_1.NgModule({
+        declarations: [painel_component_1.PainelComponent],
+        exports: [painel_component_1.PainelComponent]
     })
-], AppComponent);
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+], PainelModule);
+exports.PainelModule = PainelModule;
+//# sourceMappingURL=painel.module.js.map
