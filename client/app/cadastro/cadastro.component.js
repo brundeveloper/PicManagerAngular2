@@ -5,10 +5,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var core_1 = require("@angular/core");
+var foto_component_1 = require("../foto/foto.component");
+var http_1 = require("@angular/http");
 var CadastroComponent = (function () {
-    function CadastroComponent() {
+    //Construtor da Classe
+    function CadastroComponent(http) {
+        //Propriedades da Classe
+        this.foto = new foto_component_1.FotoComponent();
+        //Seta na propriedade da Classe
+        this.http = http;
     }
+    //Cadstra a foto
+    CadastroComponent.prototype.cadastrar = function (event) {
+        var _this = this;
+        //Cancela o evento
+        event.preventDefault();
+        //Variavel com a instancia de Headers
+        var headers = new http_1.Headers();
+        //Monta o header avisando que é JSON
+        headers.append("Content-type", "application/json");
+        //Chama url que salva a foto
+        this.http.post("v1/fotos", JSON.stringify(this.foto), { headers: headers })
+            .subscribe(function () {
+            //Limpa a objeto e consequentemente o formulário
+            _this.foto = new foto_component_1.FotoComponent();
+            //
+            console.info("foto salva com sucesso");
+        }, function (erro) { return console.info(erro); });
+    };
     return CadastroComponent;
 }());
 CadastroComponent = __decorate([
@@ -16,7 +44,8 @@ CadastroComponent = __decorate([
         moduleId: module.id,
         selector: "cadastro",
         templateUrl: "./cadastro.component.html"
-    })
+    }),
+    __metadata("design:paramtypes", [http_1.Http])
 ], CadastroComponent);
 exports.CadastroComponent = CadastroComponent;
 //# sourceMappingURL=cadastro.component.js.map

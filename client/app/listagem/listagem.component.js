@@ -22,8 +22,7 @@ var ListagemComponent = (function () {
             .subscribe(function (fotos) {
             //Coloca o retorno na propriedade
             _this.fotos = fotos;
-        }, function (erro) { return console.info(erro); } //Imprime o erro
-        );
+        }, function (erro) { return console.info(erro); });
     }
     return ListagemComponent;
 }());

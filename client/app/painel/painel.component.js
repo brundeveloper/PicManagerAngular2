@@ -10,8 +10,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var PainelComponent = (function () {
+    //Construtor da Classe
     function PainelComponent() {
     }
+    //Faz o processo depois que é passado o valor da propriedade da classe
+    PainelComponent.prototype.ngOnInit = function () {
+        //Faz ajuste limitando a quantidade de caracteres que é para ser mostrada
+        this.titulo = ((this.titulo.length > 7) ? this.titulo.substr(0, 7) + "..." : this.titulo);
+    };
     return PainelComponent;
 }());
 __decorate([
@@ -23,7 +29,8 @@ PainelComponent = __decorate([
         moduleId: module.id,
         selector: "painel",
         templateUrl: "./painel.component.html"
-    })
+    }),
+    __metadata("design:paramtypes", [])
 ], PainelComponent);
 exports.PainelComponent = PainelComponent;
 //# sourceMappingURL=painel.component.js.map

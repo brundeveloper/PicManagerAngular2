@@ -19,7 +19,6 @@ export class ListagemComponent {
             //Coloca o retorno na propriedade
             this.fotos = fotos;
         },
-        erro => console.info(erro)//Imprime o erro
-        );
+        erro => console.info(erro));
     }
 }
