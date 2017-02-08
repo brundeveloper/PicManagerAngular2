@@ -10,10 +10,23 @@ import { ListagemComponent } from "./listagem/listagem.component";
 import { CadastroComponent } from "./cadastro/cadastro.component";
 
 import "rxjs/add/operator/map";
+import { routing } from "./app.routes";
 
 @NgModule({
-    imports: [ BrowserModule, HttpModule, FotoModule, PainelModule ],
-    declarations: [ AppComponent, ListagemComponent, CadastroComponent ],
-    bootstrap: [ AppComponent ]
+    imports: [
+        BrowserModule,
+        HttpModule,
+        FotoModule,
+        PainelModule,
+        routing
+    ],
+    declarations: [
+        AppComponent,
+        ListagemComponent,
+        CadastroComponent
+    ],
+    bootstrap: [
+        AppComponent
+    ]
 })
 export class AppModule {}

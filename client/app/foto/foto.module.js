@@ -6,7 +6,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require("@angular/core");
+var common_1 = require("@angular/common");
 var foto_component_1 = require("./foto.component");
+var foto_pipes_1 = require("./foto.pipes");
 var FotoModule = (function () {
     function FotoModule() {
     }
@@ -14,8 +16,17 @@ var FotoModule = (function () {
 }());
 FotoModule = __decorate([
     core_1.NgModule({
-        declarations: [foto_component_1.FotoComponent],
-        exports: [foto_component_1.FotoComponent]
+        imports: [
+            common_1.CommonModule
+        ],
+        declarations: [
+            foto_component_1.FotoComponent,
+            foto_pipes_1.FiltroPorTitulo
+        ],
+        exports: [
+            foto_component_1.FotoComponent,
+            foto_pipes_1.FiltroPorTitulo
+        ]
     })
 ], FotoModule);
 exports.FotoModule = FotoModule;
