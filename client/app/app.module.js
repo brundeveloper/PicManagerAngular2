@@ -27,6 +27,7 @@ AppModule = __decorate([
             platform_browser_1.BrowserModule,
             http_1.HttpModule,
             forms_1.FormsModule,
+            forms_1.ReactiveFormsModule,
             foto_module_1.FotoModule,
             painel_module_1.PainelModule,
             app_routes_1.routing
