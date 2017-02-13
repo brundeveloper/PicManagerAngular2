@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { Http } from "@angular/http";
 
 @Component({
     moduleId: module.id,
@@ -11,14 +10,14 @@ export class ListagemComponent {
     fotos: Object[] = [];
 
     //Construtor
-    constructor(http: Http) {
+    constructor() {
         //Obtem resposta do servidor
-        http.get("http://localhost:3000/v1/fotos")
+        /*http.get("http://localhost:3000/v1/fotos")
         .map(res => res.json()) //Mapeia retornando a resposta em JSON
         .subscribe(fotos => {
             //Coloca o retorno na propriedade
             this.fotos = fotos;
         },
-        erro => console.info(erro));
+        erro => console.info(erro));*/
     }
 }

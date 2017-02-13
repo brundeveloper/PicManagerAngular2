@@ -27,21 +27,18 @@ var CadastroComponent = (function () {
     }
     //Cadstra a foto
     CadastroComponent.prototype.cadastrar = function (event) {
-        var _this = this;
         //Cancela o evento
         event.preventDefault();
-        //Variavel com a instancia de Headers
-        var headers = new http_1.Headers();
-        //Monta o header avisando que é JSON
-        headers.append("Content-type", "application/json");
         //Chama url que salva a foto
-        this.http.post("v1/fotos", JSON.stringify(this.foto), { headers: headers })
-            .subscribe(function () {
+        /*this.http.post("v1/fotos", JSON.stringify(this.foto), {headers: headers})
+        .subscribe(() => {
             //Limpa a objeto e consequentemente o formulário
-            _this.foto = new foto_component_1.FotoComponent();
-            //
+            this.foto = new FotoComponent();
+
+            //Imprime no console
             console.info("foto salva com sucesso");
-        }, function (erro) { return console.info(erro); });
+        },
+        erro => console.info(erro));*/
     };
     return CadastroComponent;
 }());

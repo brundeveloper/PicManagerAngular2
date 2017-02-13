@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { FotoComponent } from "../foto/foto.component";
-import { Http, Headers } from "@angular/http";
+import { Http } from "@angular/http";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
@@ -30,21 +30,15 @@ export class CadastroComponent {
         //Cancela o evento
         event.preventDefault();
 
-        //Variavel com a instancia de Headers
-        let headers = new Headers();
-
-        //Monta o header avisando que é JSON
-        headers.append("Content-type", "application/json");
-
         //Chama url que salva a foto
-        this.http.post("v1/fotos", JSON.stringify(this.foto), {headers: headers})
+        /*this.http.post("v1/fotos", JSON.stringify(this.foto), {headers: headers})
         .subscribe(() => {
             //Limpa a objeto e consequentemente o formulário
             this.foto = new FotoComponent();
 
-            //
+            //Imprime no console
             console.info("foto salva com sucesso");
         },
-        erro => console.info(erro));
+        erro => console.info(erro));*/
     }
 }
