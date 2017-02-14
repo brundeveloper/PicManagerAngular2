@@ -9,20 +9,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var foto_service_1 = require("../foto/foto.service");
 var ListagemComponent = (function () {
     //Construtor
-    function ListagemComponent() {
+    function ListagemComponent(service) {
+        var _this = this;
         //Propriedade fotos - array de objetos que guardará as fotos
         this.fotos = [];
-        //Obtem resposta do servidor
-        /*http.get("http://localhost:3000/v1/fotos")
-        .map(res => res.json()) //Mapeia retornando a resposta em JSON
-        .subscribe(fotos => {
+        //Seta o serviço na propriedade
+        this.service = service;
+        ////Chama metodo do serviço que obtem a lista de fotos
+        this.service.lista()
+            .subscribe(function (fotos) {
             //Coloca o retorno na propriedade
-            this.fotos = fotos;
-        },
-        erro => console.info(erro));*/
+            _this.fotos = fotos;
+        }, function (erro) { return console.info(erro); });
     }
+    //Remove a foto
+    ListagemComponent.prototype.remove = function (foto) {
+        ////Chama metodo do serviço que remove a foto
+        this.service.remove(foto)
+            .subscribe(function () {
+            //
+            //Imprime no console
+            console.info("Foto removida com sucesso");
+        }, function (erro) { return console.info(erro); });
+    };
     return ListagemComponent;
 }());
 ListagemComponent = __decorate([
@@ -31,7 +43,7 @@ ListagemComponent = __decorate([
         selector: "listagem",
         templateUrl: "./listagem.component.html"
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [foto_service_1.FotoService])
 ], ListagemComponent);
 exports.ListagemComponent = ListagemComponent;
 //# sourceMappingURL=listagem.component.js.map

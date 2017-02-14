@@ -1,4 +1,6 @@
 import { Component } from "@angular/core";
+import { FotoService } from "../foto/foto.service";
+import { FotoComponent } from "../foto/foto.component";
 
 @Component({
     moduleId: module.id,
@@ -7,17 +9,38 @@ import { Component } from "@angular/core";
 })
 export class ListagemComponent {
     //Propriedade fotos - array de objetos que guardará as fotos
-    fotos: Object[] = [];
+    fotos: FotoComponent[] = [];
+
+    //Propriedade com o serviço de Foto
+    service: FotoService;
 
     //Construtor
-    constructor() {
-        //Obtem resposta do servidor
-        /*http.get("http://localhost:3000/v1/fotos")
-        .map(res => res.json()) //Mapeia retornando a resposta em JSON
+    constructor(service: FotoService) {
+        //Seta o serviço na propriedade
+        this.service = service;
+
+        ////Chama metodo do serviço que obtem a lista de fotos
+        this.service.lista()
         .subscribe(fotos => {
             //Coloca o retorno na propriedade
             this.fotos = fotos;
         },
-        erro => console.info(erro));*/
+        erro => console.info(erro));
+    }
+
+    //Remove a foto
+    remove(foto: FotoComponent) {
+        ////Chama metodo do serviço que remove a foto
+        this.service.remove(foto)
+        .subscribe(
+            () => {
+                //
+                
+
+                //Imprime no console
+                console.info("Foto removida com sucesso")
+            },
+            erro => console.info(erro)
+        );
     }
 }

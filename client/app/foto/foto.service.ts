@@ -1,8 +1,10 @@
+import { Injectable } from "@angular/core";
 import { Http, Headers, Response } from "@angular/http";
 import { FotoComponent } from "./foto.component";
 import { Observable } from "rxjs";
 
-class FotoService {
+@Injectable()
+export class FotoService {
     //Propriedades da Classe
     http: Http;
     headers: Headers;
@@ -28,5 +30,11 @@ class FotoService {
     lista(): Observable<FotoComponent[]> {
         //Mapeia resulta da chamada à URL e retorna a resposta em JSON
         return this.http.get(this.url).map(res => res.json());
+    }
+
+    //Chama a url que deleta a foto
+    remove(foto: FotoComponent): Observable<Response> {
+        //Retorna Stream Response apos chamar URL
+        return this.http.delete(this.url + "/" + foto._id);
     }
 }

@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FotoComponent } from "./foto.component";
 import { FiltroPorTitulo } from "./foto.pipes";
+import { FotoService } from "./foto.service";
 
 @NgModule({
     imports: [
@@ -14,6 +15,9 @@ import { FiltroPorTitulo } from "./foto.pipes";
     exports: [
         FotoComponent,
         FiltroPorTitulo
+    ],
+    providers: [
+        FotoService
     ]
 })
-export class FotoModule { }
+export class FotoModule {}

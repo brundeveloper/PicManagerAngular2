@@ -10,35 +10,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var foto_component_1 = require("../foto/foto.component");
-var http_1 = require("@angular/http");
 var forms_1 = require("@angular/forms");
+var foto_service_1 = require("../foto/foto.service");
 var CadastroComponent = (function () {
     //Construtor da Classe
-    function CadastroComponent(http, fb) {
+    function CadastroComponent(service, fb) {
         //Propriedades da Classe
         this.foto = new foto_component_1.FotoComponent();
-        //Seta na propriedade da Classe
-        this.http = http;
+        //Seta as validações do formulario
         this.meuForm = fb.group({
             titulo: ["", forms_1.Validators.compose([forms_1.Validators.required, forms_1.Validators.minLength(4)])],
             url: ["", forms_1.Validators.required],
             descricao: [""]
         });
+        //Seta o serviço de Foto
+        this.service = service;
     }
     //Cadstra a foto
     CadastroComponent.prototype.cadastrar = function (event) {
+        var _this = this;
         //Cancela o evento
         event.preventDefault();
-        //Chama url que salva a foto
-        /*this.http.post("v1/fotos", JSON.stringify(this.foto), {headers: headers})
-        .subscribe(() => {
+        //Chama metodo do serviço que salva a foto
+        this.service.cadastra(this.foto)
+            .subscribe(function () {
             //Limpa a objeto e consequentemente o formulário
-            this.foto = new FotoComponent();
-
+            _this.foto = new foto_component_1.FotoComponent();
             //Imprime no console
             console.info("foto salva com sucesso");
-        },
-        erro => console.info(erro));*/
+        }, function (erro) { return console.info(erro); });
     };
     return CadastroComponent;
 }());
@@ -48,7 +48,7 @@ CadastroComponent = __decorate([
         selector: "cadastro",
         templateUrl: "./cadastro.component.html"
     }),
-    __metadata("design:paramtypes", [http_1.Http, forms_1.FormBuilder])
+    __metadata("design:paramtypes", [foto_service_1.FotoService, forms_1.FormBuilder])
 ], CadastroComponent);
 exports.CadastroComponent = CadastroComponent;
 //# sourceMappingURL=cadastro.component.js.map

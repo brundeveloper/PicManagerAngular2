@@ -9,8 +9,8 @@ import { Component, Input, ViewEncapsulation } from "@angular/core";
 })
 export class FotoComponent {
     //Propriedades
+    _id: string = "";
     @Input() titulo: string = "";
     @Input() url: string = "";
     descricao: string = "";
-    _id: string = "";
 }

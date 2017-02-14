@@ -12,10 +12,10 @@ var core_1 = require("@angular/core");
 var FotoComponent = (function () {
     function FotoComponent() {
         //Propriedades
+        this._id = "";
         this.titulo = "";
         this.url = "";
         this.descricao = "";
-        this._id = "";
     }
     return FotoComponent;
 }());

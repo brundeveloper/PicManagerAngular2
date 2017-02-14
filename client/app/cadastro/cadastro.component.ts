@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { FotoComponent } from "../foto/foto.component";
-import { Http } from "@angular/http";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FotoService } from "../foto/foto.service";
 
 @Component({
     moduleId: module.id,
@@ -11,18 +11,20 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 export class CadastroComponent {
     //Propriedades da Classe
     foto: FotoComponent = new FotoComponent();
-    http: Http;
     meuForm: FormGroup;
+    service: FotoService;
 
     //Construtor da Classe
-    constructor(http: Http, fb: FormBuilder) {
-        //Seta na propriedade da Classe
-        this.http = http;
+    constructor(service: FotoService, fb: FormBuilder) {
+        //Seta as validações do formulario
         this.meuForm = fb.group({
             titulo: ["", Validators.compose([ Validators.required, Validators.minLength(4) ])],
             url: ["", Validators.required],
             descricao: [""]
         });
+
+        //Seta o serviço de Foto
+        this.service = service;
     }
 
     //Cadstra a foto
@@ -30,8 +32,8 @@ export class CadastroComponent {
         //Cancela o evento
         event.preventDefault();
 
-        //Chama url que salva a foto
-        /*this.http.post("v1/fotos", JSON.stringify(this.foto), {headers: headers})
+        //Chama metodo do serviço que salva a foto
+        this.service.cadastra(this.foto)
         .subscribe(() => {
             //Limpa a objeto e consequentemente o formulário
             this.foto = new FotoComponent();
@@ -39,6 +41,6 @@ export class CadastroComponent {
             //Imprime no console
             console.info("foto salva com sucesso");
         },
-        erro => console.info(erro));*/
+        erro => console.info(erro));
     }
 }
