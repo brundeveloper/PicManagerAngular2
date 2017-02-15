@@ -16,9 +16,11 @@ var ListagemComponent = (function () {
         var _this = this;
         //Propriedade fotos - array de objetos que guardará as fotos
         this.fotos = [];
+        //Propriedade com uma mensagem
+        this.mensagem = "";
         //Seta o serviço na propriedade
         this.service = service;
-        ////Chama metodo do serviço que obtem a lista de fotos
+        //Chama metodo do serviço que obtem a lista de fotos
         this.service.lista()
             .subscribe(function (fotos) {
             //Coloca o retorno na propriedade
@@ -27,13 +29,28 @@ var ListagemComponent = (function () {
     }
     //Remove a foto
     ListagemComponent.prototype.remove = function (foto) {
+        var _this = this;
         ////Chama metodo do serviço que remove a foto
         this.service.remove(foto)
             .subscribe(function () {
-            //
+            //Copia o array de fotos
+            var novasFotos = _this.fotos.slice(0);
+            //Obtem o indice da foto
+            var indice = novasFotos.indexOf(foto);
+            //Remove a foto do array
+            novasFotos.splice(indice, 1);
+            //Atribui na propriedade o array de fotos atualizado
+            _this.fotos = novasFotos;
+            //Mesangem para o usuario
+            _this.mensagem = "Foto removida com sucesso";
             //Imprime no console
             console.info("Foto removida com sucesso");
-        }, function (erro) { return console.info(erro); });
+        }, function (erro) {
+            //Mesangem para o usuario
+            _this.mensagem = "Foto removida com sucesso";
+            //Imprime no console
+            console.info(erro);
+        });
     };
     return ListagemComponent;
 }());

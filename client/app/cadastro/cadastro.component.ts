@@ -34,13 +34,15 @@ export class CadastroComponent {
 
         //Chama metodo do serviço que salva a foto
         this.service.cadastra(this.foto)
-        .subscribe(() => {
-            //Limpa a objeto e consequentemente o formulário
-            this.foto = new FotoComponent();
+        .subscribe(
+            () => {
+                //Limpa a objeto e consequentemente o formulário
+                this.foto = new FotoComponent();
 
-            //Imprime no console
-            console.info("foto salva com sucesso");
-        },
-        erro => console.info(erro));
+                //Imprime no console
+                console.info("foto salva com sucesso");
+            },
+            erro => console.info(erro)
+        );
     }
 }
