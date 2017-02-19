@@ -22,18 +22,30 @@ var FotoService = (function () {
     }
     //Chama url para cadastro da foto
     FotoService.prototype.cadastra = function (foto) {
-        //Retorna Stream Response apos chamar URL
-        return this.http.post(this.url, JSON.stringify(foto), { headers: this.headers });
+        //Verifica se é para atualizar ou criar
+        if (foto._id) {
+            //Retorna Stream Response apos chamar URL
+            return this.http.put(this.url + "/" + foto._id, JSON.stringify(foto), { headers: this.headers });
+        }
+        else {
+            //Retorna Stream Response apos chamar URL
+            return this.http.post(this.url, JSON.stringify(foto), { headers: this.headers });
+        }
     };
     //Chama url para trazer a lista de fotos
     FotoService.prototype.lista = function () {
-        //Mapeia resulta da chamada à URL e retorna a resposta em JSON
+        //Mapeia o resultado da chamada à URL e retorna a resposta em JSON
         return this.http.get(this.url).map(function (res) { return res.json(); });
     };
     //Chama a url que deleta a foto
     FotoService.prototype.remove = function (foto) {
         //Retorna Stream Response apos chamar URL
         return this.http.delete(this.url + "/" + foto._id);
+    };
+    //Chama url que obtem a foto pelo id
+    FotoService.prototype.buscaPorId = function (id) {
+        //Mapeia o resultado da chamada à URL e retorna a resposta em JSON
+        return this.http.get(this.url + "/" + id).map(function (res) { return res.json(); });
     };
     return FotoService;
 }());

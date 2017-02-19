@@ -22,13 +22,20 @@ export class FotoService {
 
     //Chama url para cadastro da foto
     cadastra(foto: FotoComponent): Observable<Response> {
-        //Retorna Stream Response apos chamar URL
-        return this.http.post(this.url, JSON.stringify(foto), {headers: this.headers});
+        //Verifica se é para atualizar ou criar
+        if (foto._id){
+            //Retorna Stream Response apos chamar URL
+            return this.http.put(this.url + "/" + foto._id, JSON.stringify(foto), {headers: this.headers});
+        }
+        else {
+            //Retorna Stream Response apos chamar URL
+            return this.http.post(this.url, JSON.stringify(foto), {headers: this.headers});
+        }
     }
 
     //Chama url para trazer a lista de fotos
     lista(): Observable<FotoComponent[]> {
-        //Mapeia resulta da chamada à URL e retorna a resposta em JSON
+        //Mapeia o resultado da chamada à URL e retorna a resposta em JSON
         return this.http.get(this.url).map(res => res.json());
     }
 
@@ -36,5 +43,11 @@ export class FotoService {
     remove(foto: FotoComponent): Observable<Response> {
         //Retorna Stream Response apos chamar URL
         return this.http.delete(this.url + "/" + foto._id);
+    }
+
+    //Chama url que obtem a foto pelo id
+    buscaPorId(id: string): Observable<FotoComponent> {
+        //Mapeia o resultado da chamada à URL e retorna a resposta em JSON
+        return this.http.get(this.url + "/" + id).map(res => res.json());
     }
 }

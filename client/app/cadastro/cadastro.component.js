@@ -9,12 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var foto_component_1 = require("../foto/foto.component");
 var forms_1 = require("@angular/forms");
+var router_1 = require("@angular/router");
+var foto_component_1 = require("../foto/foto.component");
 var foto_service_1 = require("../foto/foto.service");
 var CadastroComponent = (function () {
     //Construtor da Classe
-    function CadastroComponent(service, fb) {
+    function CadastroComponent(service, fb, route, router) {
+        var _this = this;
         //Propriedades da Classe
         this.foto = new foto_component_1.FotoComponent();
         //Seta as validações do formulario
@@ -25,6 +27,21 @@ var CadastroComponent = (function () {
         });
         //Seta o serviço de Foto
         this.service = service;
+        //Seta o serviço de rota
+        this.route = route;
+        //Seta o roteador
+        this.router = router;
+        //Sobrescreve para obter o paramentros
+        this.route.params.subscribe(function (params) {
+            //Obtem o parametro passado
+            var id = params["id"];
+            //Verifica se passou ou ID
+            if (id) {
+                //Obtem a foto pelo id
+                _this.service.buscaPorId(id)
+                    .subscribe(function (foto) { return _this.foto = foto; }, function (erro) { return console.log(erro); });
+            }
+        });
     }
     //Cadstra a foto
     CadastroComponent.prototype.cadastrar = function (event) {
@@ -36,6 +53,8 @@ var CadastroComponent = (function () {
             .subscribe(function () {
             //Limpa a objeto e consequentemente o formulário
             _this.foto = new foto_component_1.FotoComponent();
+            //Redireciona para a rota principal
+            _this.router.navigate([""]);
             //Imprime no console
             console.info("foto salva com sucesso");
         }, function (erro) { return console.info(erro); });
@@ -48,7 +67,7 @@ CadastroComponent = __decorate([
         selector: "cadastro",
         templateUrl: "./cadastro.component.html"
     }),
-    __metadata("design:paramtypes", [foto_service_1.FotoService, forms_1.FormBuilder])
+    __metadata("design:paramtypes", [foto_service_1.FotoService, forms_1.FormBuilder, router_1.ActivatedRoute, router_1.Router])
 ], CadastroComponent);
 exports.CadastroComponent = CadastroComponent;
 //# sourceMappingURL=cadastro.component.js.map
