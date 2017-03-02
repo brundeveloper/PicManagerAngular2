@@ -18,6 +18,7 @@ export class CadastroComponent {
     service: FotoService;
     route: ActivatedRoute;
     router: Router;
+    mensagem: string = "";
 
     //Construtor da Classe
     constructor(service: FotoService, fb: FormBuilder, route: ActivatedRoute, router: Router) {
@@ -62,15 +63,21 @@ export class CadastroComponent {
         //Chama metodo do serviço que salva a foto
         this.service.cadastra(this.foto)
         .subscribe(
-            () => {
+            res => {
+                //Mostra msg na tela
+                this.mensagem = res.mensagem;
+
                 //Limpa a objeto e consequentemente o formulário
                 this.foto = new FotoComponent();
 
-                //Redireciona para a rota principal
-                this.router.navigate([""]);
+                //Verificase nao é inclusao
+                if (!res.inclusao){
+                    //Redireciona para a rota principal
+                    this.router.navigate([""]);
 
-                //Imprime no console
-                console.info("foto salva com sucesso");
+                    //Imprime no console
+                    console.info("foto salva com sucesso");
+                }
             },
             erro => console.info(erro)
         );

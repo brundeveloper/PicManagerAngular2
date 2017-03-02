@@ -25,11 +25,15 @@ var FotoService = (function () {
         //Verifica se é para atualizar ou criar
         if (foto._id) {
             //Retorna Stream Response apos chamar URL
-            return this.http.put(this.url + "/" + foto._id, JSON.stringify(foto), { headers: this.headers });
+            return this.http
+                .put(this.url + "/" + foto._id, JSON.stringify(foto), { headers: this.headers })
+                .map(function () { return new MensagemCadastro("Foto alterada com sucesso", false); });
         }
         else {
             //Retorna Stream Response apos chamar URL
-            return this.http.post(this.url, JSON.stringify(foto), { headers: this.headers });
+            return this.http
+                .post(this.url, JSON.stringify(foto), { headers: this.headers })
+                .map(function () { return new MensagemCadastro("Foto incluida com sucesso", true); });
         }
     };
     //Chama url para trazer a lista de fotos
@@ -54,4 +58,30 @@ FotoService = __decorate([
     __metadata("design:paramtypes", [http_1.Http])
 ], FotoService);
 exports.FotoService = FotoService;
+//Classe com o Padrão de retorno de mensagem de cadastro
+var MensagemCadastro = (function () {
+    //Construtor da Classe
+    function MensagemCadastro(mensagem, inclusao) {
+        //Seta os valores nas propriedades
+        this._mensagem = mensagem;
+        this._inclusao = inclusao;
+    }
+    Object.defineProperty(MensagemCadastro.prototype, "mensagem", {
+        //Metodo getters e setters
+        get: function () {
+            return this._mensagem;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MensagemCadastro.prototype, "inclusao", {
+        get: function () {
+            return this._inclusao;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return MensagemCadastro;
+}());
+exports.MensagemCadastro = MensagemCadastro;
 //# sourceMappingURL=foto.service.js.map

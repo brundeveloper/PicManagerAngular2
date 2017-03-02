@@ -19,6 +19,7 @@ var CadastroComponent = (function () {
         var _this = this;
         //Propriedades da Classe
         this.foto = new foto_component_1.FotoComponent();
+        this.mensagem = "";
         //Seta as validações do formulario
         this.meuForm = fb.group({
             titulo: ["", forms_1.Validators.compose([forms_1.Validators.required, forms_1.Validators.minLength(4)])],
@@ -50,13 +51,18 @@ var CadastroComponent = (function () {
         event.preventDefault();
         //Chama metodo do serviço que salva a foto
         this.service.cadastra(this.foto)
-            .subscribe(function () {
+            .subscribe(function (res) {
+            //Mostra msg na tela
+            _this.mensagem = res.mensagem;
             //Limpa a objeto e consequentemente o formulário
             _this.foto = new foto_component_1.FotoComponent();
-            //Redireciona para a rota principal
-            _this.router.navigate([""]);
-            //Imprime no console
-            console.info("foto salva com sucesso");
+            //Verificase nao é inclusao
+            if (!res.inclusao) {
+                //Redireciona para a rota principal
+                _this.router.navigate([""]);
+                //Imprime no console
+                console.info("foto salva com sucesso");
+            }
         }, function (erro) { return console.info(erro); });
     };
     return CadastroComponent;
