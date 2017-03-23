@@ -35,7 +35,7 @@ export class ListagemComponent {
 
     //Remove a foto
     remove(foto: FotoComponent) {
-        ////Chama metodo do serviço que remove a foto
+        //Chama metodo do serviço que remove a foto
         this.service.remove(foto)
         .subscribe(
             () => {

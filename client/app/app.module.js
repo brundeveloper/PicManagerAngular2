@@ -12,6 +12,7 @@ var forms_1 = require("@angular/forms");
 var app_component_1 = require("./app.component");
 var foto_module_1 = require("./foto/foto.module");
 var painel_module_1 = require("./painel/painel.module");
+var botao_module_1 = require("./botao/botao.module");
 var listagem_component_1 = require("./listagem/listagem.component");
 var cadastro_component_1 = require("./cadastro/cadastro.component");
 require("rxjs/add/operator/map");
@@ -30,6 +31,7 @@ AppModule = __decorate([
             forms_1.ReactiveFormsModule,
             foto_module_1.FotoModule,
             painel_module_1.PainelModule,
+            botao_module_1.BotaoModule,
             app_routes_1.routing
         ],
         declarations: [

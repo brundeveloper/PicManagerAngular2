@@ -30,7 +30,7 @@ var ListagemComponent = (function () {
     //Remove a foto
     ListagemComponent.prototype.remove = function (foto) {
         var _this = this;
-        ////Chama metodo do serviço que remove a foto
+        //Chama metodo do serviço que remove a foto
         this.service.remove(foto)
             .subscribe(function () {
             //Copia o array de fotos
