@@ -28,23 +28,26 @@ var ListagemComponent = (function () {
         }, function (erro) { return console.info(erro); });
     }
     //Remove a foto
-    ListagemComponent.prototype.remove = function (foto) {
+    ListagemComponent.prototype.remove = function (foto, painel) {
         var _this = this;
         //Chama metodo do serviço que remove a foto
         this.service.remove(foto)
             .subscribe(function () {
-            //Copia o array de fotos
-            var novasFotos = _this.fotos.slice(0);
-            //Obtem o indice da foto
-            var indice = novasFotos.indexOf(foto);
-            //Remove a foto do array
-            novasFotos.splice(indice, 1);
-            //Atribui na propriedade o array de fotos atualizado
-            _this.fotos = novasFotos;
-            //Mesangem para o usuario
-            _this.mensagem = "Foto removida com sucesso";
-            //Imprime no console
-            console.info("Foto removida com sucesso");
+            //Aplica efeito no painel
+            painel.fadeOut(function () {
+                //Copia o array de fotos
+                var novasFotos = _this.fotos.slice(0);
+                //Obtem o indice da foto
+                var indice = novasFotos.indexOf(foto);
+                //Remove a foto do array
+                novasFotos.splice(indice, 1);
+                //Atribui na propriedade o array de fotos atualizado
+                _this.fotos = novasFotos;
+                //Mesangem para o usuario
+                _this.mensagem = "Foto removida com sucesso";
+                //Imprime no console
+                console.info("Foto removida com sucesso");
+            });
         }, function (erro) {
             //Mesangem para o usuario
             _this.mensagem = "Foto removida com sucesso";

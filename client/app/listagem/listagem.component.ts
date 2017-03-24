@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { FotoService } from "../foto/foto.service";
 import { FotoComponent } from "../foto/foto.component";
+import { PainelComponent } from "../painel/painel.component";
 
 @Component({
     moduleId: module.id,
@@ -34,28 +35,31 @@ export class ListagemComponent {
     }
 
     //Remove a foto
-    remove(foto: FotoComponent) {
+    remove(foto: FotoComponent, painel: PainelComponent) {
         //Chama metodo do serviço que remove a foto
         this.service.remove(foto)
         .subscribe(
             () => {
-                //Copia o array de fotos
-                let novasFotos: FotoComponent[] = this.fotos.slice(0);
+                //Aplica efeito no painel
+                painel.fadeOut(() => {
+                    //Copia o array de fotos
+                    let novasFotos: FotoComponent[] = this.fotos.slice(0);
 
-                //Obtem o indice da foto
-                let indice = novasFotos.indexOf(foto);
+                    //Obtem o indice da foto
+                    let indice = novasFotos.indexOf(foto);
 
-                //Remove a foto do array
-                novasFotos.splice(indice, 1);
+                    //Remove a foto do array
+                    novasFotos.splice(indice, 1);
 
-                //Atribui na propriedade o array de fotos atualizado
-                this.fotos = novasFotos;
+                    //Atribui na propriedade o array de fotos atualizado
+                    this.fotos = novasFotos;
 
-                //Mesangem para o usuario
-                this.mensagem = "Foto removida com sucesso";
+                    //Mesangem para o usuario
+                    this.mensagem = "Foto removida com sucesso";
 
-                //Imprime no console
-                console.info("Foto removida com sucesso");
+                    //Imprime no console
+                    console.info("Foto removida com sucesso");
+                });
             },
             erro => {
                 //Mesangem para o usuario
